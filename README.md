@@ -46,6 +46,8 @@ npm install
 
 Build library:
 
+Modify the source files in the ```src``` directory, then run gulp to build ```DigitArray.js``` and ```DigitArray.min.js``` in the root directory.
+
 ```bash
 gulp
 ```
