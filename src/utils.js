@@ -6,7 +6,7 @@
 function checkBase(base){
   if(typeof base !== 'number' || base !== Math.floor(base)) throw('Expected the base to be an integer, but got (' + base + ').');
   if(base < MIN_BASE) throw('Expected a base greater than ' + MIN_BASE + ', but got (' + base + ').');
-  if(base < MIN_BASE) throw('Expected a base less than ' + MAX_BASE + ', but got (' + base + ').');
+  if(base > MAX_BASE) throw('Expected a base less than ' + MAX_BASE + ', but got (' + base + ').');
 }
 
 /**
