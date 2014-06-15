@@ -3,7 +3,7 @@
  * 
  * @enum {string}
  */
-var Endianess = {
+module.exports = {
   big: 'big',
   little: 'little'
 };

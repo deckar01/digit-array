@@ -1,12 +1,14 @@
+var LIMIT = require('./limit');
+
 /**
  * Throw an error if the base is invalid.
  *
  * @param {number} base The base size to check.
  */
-function checkBase(base){
+var checkBase = function(base){
   if(typeof base !== 'number' || base !== Math.floor(base)) throw('Expected the base to be an integer, but got (' + base + ').');
-  if(base < MIN_BASE) throw('Expected a base greater than ' + MIN_BASE + ', but got (' + base + ').');
-  if(base > MAX_BASE) throw('Expected a base less than ' + MAX_BASE + ', but got (' + base + ').');
+  if(base < LIMIT.MIN_BASE) throw('Expected a base greater than ' + LIMIT.MIN_BASE + ', but got (' + base + ').');
+  if(base > LIMIT.MAX_BASE) throw('Expected a base less than ' + LIMIT.MAX_BASE + ', but got (' + base + ').');
 }
 
 /**
@@ -14,7 +16,7 @@ function checkBase(base){
  *
  * @param {number} base The base size to check.
  */
-function checkAlphabet(base, alphabet){
+var checkAlphabet = function(base, alphabet){
   if(alphabet.length < base) throw('Alphabet must contain at least ' + base + ' numerals.');
 }
 
@@ -26,7 +28,7 @@ function checkAlphabet(base, alphabet){
  *
  * @return { {quotient: number, remainder: number} }
  */
-function divide(dividend, divisor){
+var divide = function(dividend, divisor){
   var quotient = Math.floor(dividend / divisor);
   var remainder = dividend - (quotient * divisor);
   return {
@@ -34,3 +36,9 @@ function divide(dividend, divisor){
     remainder: remainder
   };
 }
+
+module.exports = {
+  checkBase: checkBase,
+  checkAlphabet: checkAlphabet,
+  divide: divide
+};

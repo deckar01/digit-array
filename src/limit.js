@@ -6,3 +6,9 @@ var MIN_BASE = 2;
 
 // The largest integer that will not exceed MAX_INT during multiplication with itself.
 var MAX_BASE = Math.floor(Math.sqrt(MAX_INT));
+
+module.exports = {
+  MAX_INT: MAX_INT,
+  MIN_BASE: MIN_BASE,
+  MAX_BASE: MAX_BASE
+};

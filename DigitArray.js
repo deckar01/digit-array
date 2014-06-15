@@ -1,3 +1,18 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/**
+ * Endianess describes the order of significance of a sequence of digits.
+ * 
+ * @enum {string}
+ */
+module.exports = {
+  big: 'big',
+  little: 'little'
+};
+
+},{}],2:[function(require,module,exports){
+var Endianess = require('./endianess');
+var Utils = require('./utils');
+
 /**
  * A number represented as an array of digits of an arbitrary base.
  * @constructor
@@ -11,7 +26,7 @@
  * @param {Endianess} [endianess=Endianess.big] The endianess of the given digits.
  */
 var DigitArray = function(base, digits, endianess){
-  checkBase(base);
+  Utils.checkBase(base);
   
   this.base = base;
   endianess = endianess || Endianess.big;
@@ -85,7 +100,7 @@ DigitArray.prototype.normalize = function(){
   var carry = 0;
 
   for(var i = 0; carry > 0 || i < this.digits.length; i++){
-    var result = divide((this.digits[i] || 0) + carry, this.base);
+    var result = Utils.divide((this.digits[i] || 0) + carry, this.base);
     this.digits[i] = result.remainder;
     carry = result.quotient;
   }
@@ -108,7 +123,7 @@ DigitArray.prototype.normalize = function(){
  * @return {DigitArray} The DigitArray in the given base.
  */
 DigitArray.prototype.toBase = function(base){
-  checkBase(base);
+  Utils.checkBase(base);
 
   var other = new DigitArray(base);
   for(var i = this.digits.length - 1; i >= 0; i--){
@@ -127,7 +142,7 @@ DigitArray.prototype.toBase = function(base){
  * @return {string} The DigitArray encoded as text.
  */
 DigitArray.prototype.encode = function(alphabet, endianess){
-  checkAlphabet(this.base, alphabet);
+  Utils.checkAlphabet(this.base, alphabet);
 
   var digits = this.digits.map(function(digit){ return alphabet[digit]; });
 
@@ -148,7 +163,7 @@ DigitArray.prototype.encode = function(alphabet, endianess){
  * @return {DigitArray} The decoded DigitArray.
  */
 DigitArray.decode = function(text, base, alphabet, endianess){
-  checkAlphabet(base, alphabet);
+  Utils.checkAlphabet(base, alphabet);
 
   var map = {};
   alphabet.split('').forEach(function(numeral, index){ map[numeral] = index; });
@@ -180,6 +195,9 @@ DigitArray.prototype.toNumber = function(){
   return number;
 };
 
+module.exports = DigitArray;
+
+},{"./endianess":1,"./utils":4}],3:[function(require,module,exports){
 // The largest integer that can be uniquely represented by JavaScript's number type.
 var MAX_INT = Math.pow(2, 53) - 1;
 
@@ -189,25 +207,24 @@ var MIN_BASE = 2;
 // The largest integer that will not exceed MAX_INT during multiplication with itself.
 var MAX_BASE = Math.floor(Math.sqrt(MAX_INT));
 
-/**
- * Endianess describes the order of significance of a sequence of digits.
- * 
- * @enum {string}
- */
-var Endianess = {
-  big: 'big',
-  little: 'little'
+module.exports = {
+  MAX_INT: MAX_INT,
+  MIN_BASE: MIN_BASE,
+  MAX_BASE: MAX_BASE
 };
+
+},{}],4:[function(require,module,exports){
+var LIMIT = require('./limit');
 
 /**
  * Throw an error if the base is invalid.
  *
  * @param {number} base The base size to check.
  */
-function checkBase(base){
+var checkBase = function(base){
   if(typeof base !== 'number' || base !== Math.floor(base)) throw('Expected the base to be an integer, but got (' + base + ').');
-  if(base < MIN_BASE) throw('Expected a base greater than ' + MIN_BASE + ', but got (' + base + ').');
-  if(base > MAX_BASE) throw('Expected a base less than ' + MAX_BASE + ', but got (' + base + ').');
+  if(base < LIMIT.MIN_BASE) throw('Expected a base greater than ' + LIMIT.MIN_BASE + ', but got (' + base + ').');
+  if(base > LIMIT.MAX_BASE) throw('Expected a base less than ' + LIMIT.MAX_BASE + ', but got (' + base + ').');
 }
 
 /**
@@ -215,7 +232,7 @@ function checkBase(base){
  *
  * @param {number} base The base size to check.
  */
-function checkAlphabet(base, alphabet){
+var checkAlphabet = function(base, alphabet){
   if(alphabet.length < base) throw('Alphabet must contain at least ' + base + ' numerals.');
 }
 
@@ -227,7 +244,7 @@ function checkAlphabet(base, alphabet){
  *
  * @return { {quotient: number, remainder: number} }
  */
-function divide(dividend, divisor){
+var divide = function(dividend, divisor){
   var quotient = Math.floor(dividend / divisor);
   var remainder = dividend - (quotient * divisor);
   return {
@@ -235,3 +252,11 @@ function divide(dividend, divisor){
     remainder: remainder
   };
 }
+
+module.exports = {
+  checkBase: checkBase,
+  checkAlphabet: checkAlphabet,
+  divide: divide
+};
+
+},{"./limit":3}]},{},[2])

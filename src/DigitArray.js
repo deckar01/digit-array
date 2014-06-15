@@ -1,3 +1,6 @@
+var Endianess = require('./endianess');
+var Utils = require('./utils');
+
 /**
  * A number represented as an array of digits of an arbitrary base.
  * @constructor
@@ -11,7 +14,7 @@
  * @param {Endianess} [endianess=Endianess.big] The endianess of the given digits.
  */
 var DigitArray = function(base, digits, endianess){
-  checkBase(base);
+  Utils.checkBase(base);
   
   this.base = base;
   endianess = endianess || Endianess.big;
@@ -85,7 +88,7 @@ DigitArray.prototype.normalize = function(){
   var carry = 0;
 
   for(var i = 0; carry > 0 || i < this.digits.length; i++){
-    var result = divide((this.digits[i] || 0) + carry, this.base);
+    var result = Utils.divide((this.digits[i] || 0) + carry, this.base);
     this.digits[i] = result.remainder;
     carry = result.quotient;
   }
@@ -108,7 +111,7 @@ DigitArray.prototype.normalize = function(){
  * @return {DigitArray} The DigitArray in the given base.
  */
 DigitArray.prototype.toBase = function(base){
-  checkBase(base);
+  Utils.checkBase(base);
 
   var other = new DigitArray(base);
   for(var i = this.digits.length - 1; i >= 0; i--){
@@ -127,7 +130,7 @@ DigitArray.prototype.toBase = function(base){
  * @return {string} The DigitArray encoded as text.
  */
 DigitArray.prototype.encode = function(alphabet, endianess){
-  checkAlphabet(this.base, alphabet);
+  Utils.checkAlphabet(this.base, alphabet);
 
   var digits = this.digits.map(function(digit){ return alphabet[digit]; });
 
@@ -148,7 +151,7 @@ DigitArray.prototype.encode = function(alphabet, endianess){
  * @return {DigitArray} The decoded DigitArray.
  */
 DigitArray.decode = function(text, base, alphabet, endianess){
-  checkAlphabet(base, alphabet);
+  Utils.checkAlphabet(base, alphabet);
 
   var map = {};
   alphabet.split('').forEach(function(numeral, index){ map[numeral] = index; });
@@ -179,3 +182,5 @@ DigitArray.prototype.toNumber = function(){
   
   return number;
 };
+
+module.exports = DigitArray;

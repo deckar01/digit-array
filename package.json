@@ -7,8 +7,12 @@
   },
   "devDependencies": {
     "gulp": "*",
+    "gulp-rename": "*",
     "gulp-jshint": "*",
+    "gulp-browserify": "*",
     "gulp-concat": "*",
-    "gulp-uglify": "*"
+    "gulp-uglify": "*",
+    "gulp-mocha": "*",
+    "chai": "*"
   }
 }
