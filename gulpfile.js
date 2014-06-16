@@ -26,7 +26,7 @@ gulp.task('jshint', ['js'], function() {
 
 gulp.task('test', ['js', 'uglify'], function(){
   gulp.src(['./test/*.tests.js'])
-      .pipe(mocha({reporter: 'nyan'}));
+      .pipe(mocha({reporter: 'spec'}));
 })
 
 gulp.task('default', ['js', 'uglify'], function(){
