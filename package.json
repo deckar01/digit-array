@@ -1,16 +1,34 @@
 {
   "name": "DigitArray",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "Encode and decode numbers in arbitrary bases",
+  "main": "./src/DigitArray.js",
+  "scripts": {
+    "test": "./node_modules/.bin/gulp test"
+  },
   "repository": {
     "type": "git",
     "url": "http://github.com/deckar01/digit-array.git"
+  },
+  "keywords": [
+    "digit",
+    "array",
+    "base", "radix",
+    "convert", "conversion",
+    "number",
+    "encode", "encoding",
+    "alphabet"
+  ],
+  "author": "Jared Deckard <jared.deckard@gmail.com> (github.com/deckar01)",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/deckar01/digit-array/issues"
   },
   "devDependencies": {
     "gulp": "*",
     "gulp-rename": "*",
     "gulp-jshint": "*",
     "gulp-browserify": "*",
-    "gulp-concat": "*",
     "gulp-uglify": "*",
     "gulp-mocha": "*",
     "chai": "*"
