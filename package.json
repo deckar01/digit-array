@@ -1,5 +1,5 @@
 {
-  "name": "DigitArray",
+  "name": "digit-array",
   "version": "0.1.0",
   "description": "Encode and decode numbers in arbitrary bases",
   "main": "./src/DigitArray.js",

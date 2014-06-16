@@ -23,7 +23,7 @@ var DigitArray = function(base, digits, endianess){
     this.digits = [digits];
     this.normalize();
   } else {
-    this.digits = digits || [0];
+    this.digits = (digits || [0]).slice();
     if(endianess === Endianess.big) this.digits.reverse();
   }
 };
