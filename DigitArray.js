@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.DigitArray=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 /**
  * Endianess describes the order of significance of a sequence of digits.
  * 
@@ -9,9 +9,9 @@ module.exports = {
   little: 'little'
 };
 
-},{}],2:[function(require,module,exports){
-var Endianess = require('./endianess');
-var Utils = require('./utils');
+},{}],2:[function(_dereq_,module,exports){
+var Endianess = _dereq_('./endianess');
+var Utils = _dereq_('./utils');
 
 /**
  * A number represented as an array of digits of an arbitrary base.
@@ -197,7 +197,7 @@ DigitArray.prototype.toNumber = function(){
 
 module.exports = DigitArray;
 
-},{"./endianess":1,"./utils":4}],3:[function(require,module,exports){
+},{"./endianess":1,"./utils":4}],3:[function(_dereq_,module,exports){
 // The largest integer that can be uniquely represented by JavaScript's number type.
 var MAX_INT = Math.pow(2, 53) - 1;
 
@@ -213,8 +213,8 @@ module.exports = {
   MAX_BASE: MAX_BASE
 };
 
-},{}],4:[function(require,module,exports){
-var LIMIT = require('./limit');
+},{}],4:[function(_dereq_,module,exports){
+var LIMIT = _dereq_('./limit');
 
 /**
  * Throw an error if the base is invalid.
@@ -225,7 +225,7 @@ var checkBase = function(base){
   if(typeof base !== 'number' || base !== Math.floor(base)) throw('Expected the base to be an integer, but got (' + base + ').');
   if(base < LIMIT.MIN_BASE) throw('Expected a base greater than ' + LIMIT.MIN_BASE + ', but got (' + base + ').');
   if(base > LIMIT.MAX_BASE) throw('Expected a base less than ' + LIMIT.MAX_BASE + ', but got (' + base + ').');
-}
+};
 
 /**
  * Throw an error if the alphabet size is smaller than the base size.
@@ -234,7 +234,7 @@ var checkBase = function(base){
  */
 var checkAlphabet = function(base, alphabet){
   if(alphabet.length < base) throw('Alphabet must contain at least ' + base + ' numerals.');
-}
+};
 
 /**
  * Returns the quotient and remainder produced by dividing the dividend by the divisor.
@@ -251,7 +251,7 @@ var divide = function(dividend, divisor){
     quotient: quotient,
     remainder: remainder
   };
-}
+};
 
 module.exports = {
   checkBase: checkBase,
@@ -260,3 +260,5 @@ module.exports = {
 };
 
 },{"./limit":3}]},{},[2])
+(2)
+});

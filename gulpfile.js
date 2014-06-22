@@ -7,7 +7,7 @@ var mocha = require('gulp-mocha');
 
 gulp.task('js', function() {
   gulp.src('./src/DigitArray.js')
-      .pipe(browserify())
+      .pipe(browserify({standalone: 'DigitArray'}))
       .pipe(gulp.dest('./'));
 });
 
@@ -19,7 +19,7 @@ gulp.task('uglify', ['js'], function() {
 });
 
 gulp.task('jshint', ['js'], function() {
-  gulp.src('./DigitArray.js')
+  gulp.src('./src/*.js')
       .pipe(jshint())
       .pipe(jshint.reporter('default'));
 });

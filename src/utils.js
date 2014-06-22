@@ -9,7 +9,7 @@ var checkBase = function(base){
   if(typeof base !== 'number' || base !== Math.floor(base)) throw('Expected the base to be an integer, but got (' + base + ').');
   if(base < LIMIT.MIN_BASE) throw('Expected a base greater than ' + LIMIT.MIN_BASE + ', but got (' + base + ').');
   if(base > LIMIT.MAX_BASE) throw('Expected a base less than ' + LIMIT.MAX_BASE + ', but got (' + base + ').');
-}
+};
 
 /**
  * Throw an error if the alphabet size is smaller than the base size.
@@ -18,7 +18,7 @@ var checkBase = function(base){
  */
 var checkAlphabet = function(base, alphabet){
   if(alphabet.length < base) throw('Alphabet must contain at least ' + base + ' numerals.');
-}
+};
 
 /**
  * Returns the quotient and remainder produced by dividing the dividend by the divisor.
@@ -35,7 +35,7 @@ var divide = function(dividend, divisor){
     quotient: quotient,
     remainder: remainder
   };
-}
+};
 
 module.exports = {
   checkBase: checkBase,
