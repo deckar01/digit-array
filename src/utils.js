@@ -21,6 +21,27 @@ var checkAlphabet = function(base, alphabet){
 };
 
 /**
+ * Converts a string to an array of alphabet indexes.
+ * Throws an error if the text contains characters not in the alphabet.
+ *
+ * @param {string} text The text to convert to digits.
+ * @param {string} alphabet The alphabet used to decode the text.
+ *
+ * @return {Array.<number>} The index of each character in the alphabet.
+ */
+var textToDigits = function(text, alphabet){
+  var map = {};
+  alphabet.split('').forEach(function(numeral, index){ map[numeral] = index; });
+
+  return text.split('').map(function(numeral){
+    var digit = map[numeral];
+    if (typeof digit !== 'number') throw('Input contains a character (' + numeral + ') not in the alphabet.');
+    return digit;
+  });
+};
+
+
+/**
  * Returns the quotient and remainder produced by dividing the dividend by the divisor.
  *
  * @param {number} divident The number that is being divided.
