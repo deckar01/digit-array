@@ -153,10 +153,7 @@ DigitArray.prototype.encode = function(alphabet, endianess){
 DigitArray.decode = function(text, base, alphabet, endianess){
   Utils.checkAlphabet(base, alphabet);
 
-  var map = {};
-  alphabet.split('').forEach(function(numeral, index){ map[numeral] = index; });
-
-  var digits = text.split('').map(function(numeral){ return map[numeral]; });
+  var digits = Utils.textToDigits(text, alphabet);
 
   endianess = endianess || Endianess.big;
   if(endianess === Endianess.little) digits.reverse();
