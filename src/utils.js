@@ -21,6 +21,29 @@ var checkAlphabet = function(base, alphabet){
 };
 
 /**
+ * Memoize inverse alphabet maps to speed up successive decode operations.
+ *
+ * @type {object}
+ */
+var inverseAlphabetCache = {};
+
+/**
+ * Get the map of characters to their index in the alphabet.
+ *
+ * @param {string} alphabet
+ *
+ * @returns {object} The inverse alphabet map.
+ */
+var getInverseAlphabet = function(alphabet){
+  if (!inverseAlphabetCache[alphabet]){
+    inverseAlphabetCache[alphabet] = {};
+    alphabet.split('').forEach(function(numeral, index){ map[numeral] = index; });
+  }
+
+  return inverseAlphabetCache[alphabet];
+};
+
+/**
  * Converts a string to an array of alphabet indexes.
  * Throws an error if the text contains characters not in the alphabet.
  *
@@ -30,11 +53,10 @@ var checkAlphabet = function(base, alphabet){
  * @return {Array.<number>} The index of each character in the alphabet.
  */
 var textToDigits = function(text, alphabet){
-  var map = {};
-  alphabet.split('').forEach(function(numeral, index){ map[numeral] = index; });
+  var inverseAlphabet = getInverseAlphabet(alphabet);
 
   return text.split('').map(function(numeral){
-    var digit = map[numeral];
+    var digit = inverseAlphabet[numeral];
     if (typeof digit !== 'number') throw('Input contains a character (' + numeral + ') not in the alphabet.');
     return digit;
   });
