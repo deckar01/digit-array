@@ -3,6 +3,11 @@ var expect = chai.expect;
 
 var DigitArray = require('../src/DigitArray');
 
+var baseTables = [];
+for(var base = 2; base <= 100; base++) {
+  baseTables[base] = require('./data/base' + base + '.json');
+}
+
 describe('DigitArray', function(){
   describe('constructor', function(){
     it('should create new instances of DigitArray', function(){
@@ -39,11 +44,13 @@ describe('DigitArray', function(){
   });
 
   describe('toBase()', function(){
-    it('should convert between the bases 2 and 100', function(){
-      for(var oldBase = 2; oldBase <= 100; oldBase++){
+    for(var _oldBase = 100; _oldBase >= 2; _oldBase--){
+      var oldBase = _oldBase;
+      var oldBaseTable = baseTables[oldBase];
+
+      it('should convert from bases ' + oldBase, function(){
         for(var newBase = 2; newBase <= 100; newBase++){
-          var oldBaseTable = require('./data/base' + oldBase + '.json');
-          var newBaseTable = require('./data/base' + newBase + '.json');
+          var newBaseTable = baseTables[newBase];
 
           for(var i = 0; i < 10; i++){
             var value = Math.floor(Math.random() * 1000); // [0, 999]
@@ -54,7 +61,7 @@ describe('DigitArray', function(){
             expect(newDigitArray.digits).to.deep.equal(newBaseTable[value].slice().reverse());
           }
         }
-      }
-    });
+      });
+    }
   });
 });
