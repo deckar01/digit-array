@@ -1,8 +1,8 @@
-##DigitArray
+## DigitArray
 
 The DigitArray library is designed to encode and decode numbers in arbirtary bases.
 
-###Example
+### Example
 
 ```javascript
 var decimalValue = new DigitArray(10, [1, 3, 3, 7]);
@@ -30,7 +30,7 @@ DigitArray.decode(encodedHexValue, 16, '0123456789abcdef').toNumber();
 // 1337
 ```
 
-###Dev setup
+### Dev setup
 
 Requirements:
 
