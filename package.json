@@ -27,7 +27,6 @@
   "devDependencies": {
     "gulp": "*",
     "gulp-rename": "*",
-    "gulp-jshint": "*",
     "gulp-browserify": "*",
     "gulp-uglify": "*",
     "gulp-mocha": "*",
